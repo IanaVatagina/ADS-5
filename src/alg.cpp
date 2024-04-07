@@ -34,6 +34,7 @@ std::string infx2pstfx(std::string inf) {
 		char currentElement = inf[i];
 		if (currentElement >= '0' && currentElement <= '9') {
 			pstfxString.push_back(currentElement);
+			pstfxString += " ";
 		} else if (isOperation(currentElement)) {
 			if (currentElement == '(')
 				stack1.push(currentElement);
