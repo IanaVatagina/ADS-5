@@ -4,8 +4,7 @@
 #include "tstack.h"
 
 int priorityOperations(char operSymb) {
-	switch (operSymb)
-	{
+	switch (operSymb) {
 	case '(':
 		return 0;
 	case ')':
@@ -34,14 +33,13 @@ std::string infx2pstfx(std::string inf) {
 		char currentElement = inf[i];
 		if (currentElement >= '0' && currentElement <= '9') {
 			pstfxString.push_back(currentElement);
-			pstfxString.push_back(' ');
-		} else if (isOperation(currentElement)) {
-			if (currentElement == '(')
+		} else if (currentElement == '(')
 				stack1.push(currentElement);
-			else if (!stack1.isEmpty() && priorityOperations(currentElement) > priorityOperations(stack1.get()))
+        else if (isOperation(currentElement)) {
+			if (!stack1.isEmpty() && priorityOperations(currentElement) > priorityOperations(stack1.get()))
 				stack1.push(currentElement);
 			else if ((!stack1.isEmpty()) && (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
-				while ((!stack1.isEmpty()) && (priorityOperations(currentElement) > priorityOperations(stack1.get()))) {
+				while ((!stack1.isEmpty()) && (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
 					pstfxString.push_back(stack1.pop());
 					pstfxString.push_back(' ');
 				}
