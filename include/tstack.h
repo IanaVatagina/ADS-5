@@ -28,7 +28,7 @@ public:
 			throw std::string("End");
 	}
 	void push(T item) {
-		if (top <= size - 1)
+		if (top <= size-1)
 			data[++top] = item;
 		else
 			throw std::string("Full");
