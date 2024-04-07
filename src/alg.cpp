@@ -4,7 +4,8 @@
 #include "tstack.h"
 
 int priorityOperations(char operSymb) {
-	switch (operSymb) {
+	switch (operSymb)
+	{
 	case '(':
 		return 0;
 	case ')':
@@ -33,13 +34,16 @@ std::string infx2pstfx(std::string inf) {
 		char currentElement = inf[i];
 		if (currentElement >= '0' && currentElement <= '9') {
 			pstfxString.push_back(currentElement);
-		} else if (currentElement == '(')
+		} else if (isOperation(currentElement)) {
+			if (currentElement == '(')
 				stack1.push(currentElement);
-        else if (isOperation(currentElement)) {
-			if (!stack1.isEmpty() && priorityOperations(currentElement) > priorityOperations(stack1.get()))
+			else if (!stack1.isEmpty() &&
+                priorityOperations(currentElement) > priorityOperations(stack1.get()))
 				stack1.push(currentElement);
-			else if ((!stack1.isEmpty()) && (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
-				while ((!stack1.isEmpty()) && (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
+			else if ((!stack1.isEmpty()) &&
+                (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
+				while ((!stack1.isEmpty()) &&
+                    (priorityOperations(currentElement) > priorityOperations(stack1.get()))) {
 					pstfxString.push_back(stack1.pop());
 					pstfxString.push_back(' ');
 				}
@@ -61,6 +65,34 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
-  // добавьте код
-  return 0;
+	TStack<int, 100> stack2;
+	for (int i = 0; i < pref.size(); i++) {
+		char currentElement = pref[i];
+		if (isdigit(currentElement)) {
+			std::string newNumber;
+			while ((isdigit(currentElement)) && (i < pref.size())) {
+				newNumber += currentElement;
+				i++;
+			}
+			stack2.push(stoi(newNumber));
+			i--;
+		} else if (isOperation(currentElement)) {
+			int firstNum = stack2.pop();
+			int secondNum = stack2.pop();
+			switch (currentElement)
+			{
+			case '+':
+				return firstNum + secondNum;
+			case '-':
+				return firstNum - secondNum;
+			case '*':
+				return firstNum * secondNum;
+			case '/':
+				return firstNum / secondNum;
+			default:
+				return 0;
+			}
+		}
+	}
+    return stack2.pop();
 }
