@@ -37,13 +37,10 @@ std::string infx2pstfx(std::string inf) {
 		} else if (isOperation(currentElement)) {
 			if (currentElement == '(')
 				stack1.push(currentElement);
-			else if (!stack1.isEmpty() &&
-                priorityOperations(currentElement) > priorityOperations(stack1.get()))
+			else if (!stack1.isEmpty() && priorityOperations(currentElement) > priorityOperations(stack1.get()))
 				stack1.push(currentElement);
-			else if ((!stack1.isEmpty()) &&
-                (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
-				while ((!stack1.isEmpty()) &&
-                    (priorityOperations(currentElement) > priorityOperations(stack1.get()))) {
+			else if ((!stack1.isEmpty()) && (priorityOperations(currentElement) <= priorityOperations(stack1.get()))) {
+				while ((!stack1.isEmpty()) && (priorityOperations(currentElement) > priorityOperations(stack1.get()))) {
 					pstfxString.push_back(stack1.pop());
 					pstfxString.push_back(' ');
 				}
@@ -74,7 +71,7 @@ int eval(std::string pref) {
 				newNumber += currentElement;
 				i++;
 			}
-			stack2.push(stoi(newNumber));
+			stack2.push(std::stoi(newNumber));
 			i--;
 		} else if (isOperation(currentElement)) {
 			int firstNum = stack2.pop();
