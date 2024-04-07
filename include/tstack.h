@@ -10,9 +10,7 @@ private:
 	int top;
 
 public:
-	TStack() : top(-1) {
-		data = new T[size];
-	}
+	TStack() : top(-1) {}
 	T get() const {
 		if (!isEmpty() && top > -1)
 			return data[top];
