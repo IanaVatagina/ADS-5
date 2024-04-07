@@ -8,18 +8,15 @@ private:
 	T data[size];
 	int top;
 public:
-	TStack() :top(-1) {}
+	TStack() : top(-1) {}
 	T get() const {
-		if (!isEmpty())
+		if (!isEmpty() && top > -1)
 			return data[top];
 		else
 			throw std::string("Empty");
 	}
 	bool isEmpty() const {
-		return top == 0;
-	}
-	bool isFull() const {
-		return top == size - 1;
+		return top == -1;
 	}
 	T pop() {
 		if (top >= 0)
@@ -28,7 +25,7 @@ public:
 			throw std::string("End");
 	}
 	void push(T item) {
-		if (top <= size-1)
+		if (top < size - 1)
 			data[++top] = item;
 		else
 			throw std::string("Full");
