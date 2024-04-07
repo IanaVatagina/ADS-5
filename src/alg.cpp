@@ -59,6 +59,8 @@ std::string infx2pstfx(std::string inf) {
 		pstfxString.push_back(stack1.pop());
 		pstfxString.push_back(' ');
 	}
+	if (pstfxString.back() == ' ')
+	    pstfxString.pop_back();
     return pstfxString;
 }
 
