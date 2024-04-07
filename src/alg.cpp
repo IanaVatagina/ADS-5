@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include "tstack.h"
+
 int priorityOperations(char operSymb) {
 	switch (operSymb)
 	{
@@ -18,7 +19,7 @@ int priorityOperations(char operSymb) {
 	case '/':
 		return 3;
 	default:
-		break;
+		return -1;
 	}
 }
 
@@ -50,7 +51,7 @@ std::string infx2pstfx(std::string inf) {
 		} else if (currentElement == ')') {
 			while ((!stack1.isEmpty()) && (stack1.get() != '(')) {
 				pstfxString.push_back(stack1.pop());
-				pstfxString.push_back(' ');
+                pstfxString.push_back(' ');
 			}
 		}
 	}
