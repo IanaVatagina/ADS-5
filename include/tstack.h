@@ -7,8 +7,11 @@ class TStack {
 private:
 	T data[size];
 	int top;
+
 public:
-	TStack() : top(-1) {}
+	TStack() : top(-1) {
+		data = new T[size];
+	}
 	T get() const {
 		if (!isEmpty() && top > -1)
 			return data[top];
