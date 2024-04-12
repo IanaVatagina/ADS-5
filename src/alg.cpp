@@ -72,9 +72,9 @@ int eval(std::string pref) {
         std::string newNumber;
         if (currentElement >= '0' && currentElement <= '9') {
             newNumber += currentElement;
-        } else if (currentElement == ' ') {
+        } else if (currentElement == ' ' && !newNumber.empty()) {
             stack2.push(std::stoi(newNumber));
-            newNumber = "";
+            newNumber.clear();
         } else if (isOperation(currentElement)) {
             int firstNum = stack2.pop();
             int secondNum = stack2.pop();
