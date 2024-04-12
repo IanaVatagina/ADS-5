@@ -4,8 +4,7 @@
 #include "tstack.h"
 
 int priorityOperations(char operSymb) {
-	switch (operSymb)
-	{
+	switch (operSymb) {
 	case '(':
 		return 0;
 	case ')':
@@ -36,7 +35,8 @@ std::string infx2pstfx(std::string inf) {
             pstfxString += currentElement;
             pstfxString += ' ';
         } else {
-            if (stack1.isEmpty() == 1 || currentElement == '(' || priorityOperations(currentElement) > priorityOperations(stack1.get()))
+            if (stack1.isEmpty() == 1 || currentElement == '(' ||
+            priorityOperations(currentElement) > priorityOperations(stack1.get()))
                 stack1.push(currentElement);
             else if (priorityOperations(currentElement) <= priorityOperations(stack1.get())) {
                 if (isOperation(currentElement)) {
@@ -67,29 +67,37 @@ std::string infx2pstfx(std::string inf) {
 
 int eval(std::string pref) {
     TStack<int, 100> stack2;
-    for (int i = 0; i < pref.size(); i++) {
-        char currentElement = pref[i];
-        std::string newNumber;
+    std::string newNumber;
+    int res;
+    for (char currentElement : pref) {
         if (currentElement >= '0' && currentElement <= '9') {
             newNumber += currentElement;
-        } else if (currentElement == ' ' && !newNumber.empty()) {
+        } else if (!newNumber.empty() && currentElement == ' ') {
             stack2.push(std::stoi(newNumber));
-            newNumber.clear();
-        } else if (isOperation(currentElement)) {
+            newNumber = "";
+        } else {
             int firstNum = stack2.pop();
             int secondNum = stack2.pop();
-            switch (currentElement)
-            {
+            switch (currentElement) {
                 case '+':
-                    return firstNum + secondNum;
+                    res = firstNum + secondNum;
+                    stack2.push(res);
+                    break;
                 case '-':
-                    return firstNum - secondNum;
+                    res = firstNum - secondNum;
+                    stack2.push(res);
+                    break;
                 case '*':
-                    return firstNum * secondNum;
+                    res = firstNum * secondNum;
+                    stack2.push(res);
+                    break;
                 case '/':
-                    return firstNum / secondNum;
+                    res = firstNum / secondNum;
+                    stack2.push(res);
+                    break;
                 default:
                     return 0;
+                    break;
             }
         }
     }
