@@ -23,7 +23,8 @@ int priorityOperations(char operSymb) {
 }
 
 bool isOperation(char nowSymb) {
-    return (nowSymb == '+' || nowSymb == '-' || nowSymb == '*' || nowSymb == '/');
+    return (nowSymb == '+' || nowSymb == '-' ||
+    nowSymb == '*' || nowSymb == '/');
 }
 
 std::string infx2pstfx(std::string inf) {
@@ -36,9 +37,11 @@ std::string infx2pstfx(std::string inf) {
             pstfxString += ' ';
         } else {
             if (stack1.isEmpty() == 1 || currentElement == '(' ||
-            priorityOperations(currentElement) > priorityOperations(stack1.get()))
+            priorityOperations(currentElement) >
+            priorityOperations(stack1.get())) {
                 stack1.push(currentElement);
-            else if (priorityOperations(currentElement) <= priorityOperations(stack1.get())) {
+            } else if (priorityOperations(currentElement) <=
+            priorityOperations(stack1.get())) {
                 if (isOperation(currentElement)) {
                     pstfxString = pstfxString + stack1.pop();
                     pstfxString = pstfxString + ' ';
