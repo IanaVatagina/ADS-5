@@ -58,6 +58,10 @@ std::string infx2pstfx(std::string inf) {
 			pstfxString += ' ';
 		}
 	}
+	while (pstfxString.find('(') || pstfxString.find(')')) {
+		pstfxString.pop_back();
+        pstfxString.pop_back();
+	}
 	return pstfxString;
 }
 
