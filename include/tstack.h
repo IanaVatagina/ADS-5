@@ -5,12 +5,12 @@
 
 template<typename T, int size>
 class TStack {
-private:
+ private:
     static const int kSize = size;
     T data[kSize];
     int top;
 
-public:
+ public:
     TStack() : top(0) {}
     T get() const {
         if (!isEmpty())
