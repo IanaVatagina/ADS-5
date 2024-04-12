@@ -12,7 +12,7 @@ private:
 public:
 	TStack() : top(0) {}
 	T get() const {
-		if (!isEmpty() && top > -1)
+		if (!isEmpty())
 			return data[top-1];
 		else
 			throw std::string("Empty");

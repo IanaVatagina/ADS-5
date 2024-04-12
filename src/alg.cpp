@@ -53,14 +53,11 @@ std::string infx2pstfx(std::string inf) {
 		}
 	}
 	while (stack1.isEmpty() != 1) {
-		pstfxString = pstfxString + stack1.pop();
+        if (stack1.get() != '(' || stack1.get() != ')')
+		    pstfxString += stack1.pop();
 		if (stack1.isEmpty() != 1) {
 			pstfxString += ' ';
 		}
-	}
-	while (pstfxString.find('(') || pstfxString.find(')')) {
-		pstfxString.pop_back();
-        pstfxString.pop_back();
 	}
 	return pstfxString;
 }
